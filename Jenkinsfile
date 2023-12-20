@@ -1,7 +1,7 @@
 
 pipeline{
     agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed 
-        label "master"
+        label "Built-In Node"
     }
     tools {
         jdk 'Java17'
