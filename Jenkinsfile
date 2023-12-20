@@ -1,7 +1,7 @@
 
 pipeline{
     agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed 
-        label "Built-In Node"
+        label "Built-In"
     }
     tools {
         jdk 'Java17'
@@ -27,7 +27,7 @@ pipeline{
     
         stage("Checkout from SCM"){
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/techinanutshellhack/complete-prodcution-e2e-pipeline'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/techinanutshellhack/production-devops.git'
             }
 
         }
