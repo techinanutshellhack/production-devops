@@ -1,6 +1,6 @@
 
 pipeline{
-    agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed 
+    agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed . in production , use a dedicated agent
         label "built-in"
     }
     tools {
@@ -25,26 +25,26 @@ pipeline{
 
         }
     
-        stage("Checkout from SCM"){
+        stage("Checkout from SCM"){//check out the code from git repo into the jenkins workspace 
             steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/techinanutshellhack/production-devops.git'
             }
 
         }
 
-    //     stage("Build Application"){
-    //         steps {
-    //             sh "mvn clean package"
-    //         }
+        stage("Build Application"){//build application 
+            steps {
+                sh "mvn clean package"
+            }
 
-    //     }
+        }
 
-    //     stage("Test Application"){
-    //         steps {
-    //             sh "mvn test"
-    //         }
+        stage("Test Application"){// test application
+            steps {
+                sh "mvn test"
+            }
 
-    //     }
+        }
         
     //     stage("Sonarqube Analysis") {
     //         steps {
