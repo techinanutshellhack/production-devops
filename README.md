@@ -1,4 +1,1 @@
-# Sample application for e2e DevOps Pipeline
-## This is a sample application to demonstrate an end to end DevOps Pipeline
-
-
+# Sample application for CICD pipeline using jenkins and to perfoem application code scan, pushing the docker image to a container registry 
