@@ -11,10 +11,10 @@ pipeline{
         APP_NAME = "production-pipeline"
         RELEASE = "1.0.0"
         DOCKER_USER = "sweetpeaito"
-        DOCKER_PASS = 'Password!12'
+        DOCKER_PASS = 'dockerhub'//this is a secret that will be set up and used to sign into docker. it wull be setup in docker hub as an access token
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
+      //  JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
 
     }
     stages{
