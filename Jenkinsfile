@@ -1,7 +1,8 @@
 
 pipeline{
     agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed . in production , use a dedicated agent
-        label "built-in"
+        // label "built-in"
+        docker { image 'node:20.10.0-alpine3.19' }
     }
     tools {
         jdk 'Java17'
