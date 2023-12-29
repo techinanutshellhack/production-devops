@@ -86,11 +86,12 @@ pipeline{
           steps{
             echo 'Packaging demo app with docker'
             script{
-              docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                  docker_image = docker.build "${IMAGE_NAME}"
-                  docker_image.push()
-                  docker_image.push("dev")
-              docker_image.push("latest")
+                    docker.withRegistry('',DOCKER_PASS ) {
+                    docker_image = docker.build "${IMAGE_NAME}"
+                    docker_image.push()
+                    docker_image.push("dev")
+                    docker_image.push("latest")
+                   // dockerImage = docker.build registry + "latest"
               }
             }
           }
