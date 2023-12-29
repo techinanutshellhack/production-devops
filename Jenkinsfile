@@ -83,26 +83,26 @@ pipeline{
         //      }
 
         //  }
-    //     stage('Docker Build and Push'){
+        stage('Docker Build and Push'){
           
-    //       steps{
-    //         echo 'Packaging demo app with docker'
-    //         script{
-    //                 docker.withRegistry('',DOCKER_PASS ) {
-    //                         docker_image = docker.build "${IMAGE_NAME}"
-    //                         docker_image.push()
-    //                         docker_image.push("dev")
-    //                         docker_image.push("latest")
-    //                // dockerImage = docker.build registry + "latest"
-    //           }
-    //         }
-    //       }
-    //   }
-            stage('Docker Build'){
-                steps {
-                sh 'docker build -t sweetpeaito/production-application:latest .'
+          steps{
+            echo 'Packaging demo app with docker'
+            script{
+                    docker.withRegistry('',DOCKER_PASS ) {
+                            docker_image = docker.build "${IMAGE_NAME}"
+                            docker_image.push()
+                            docker_image.push("dev")
+                            docker_image.push("latest")
+                   // dockerImage = docker.build registry + "latest"
+              }
             }
-         }
+          }
+      }
+        //     stage('Docker Build'){
+        //         steps {
+        //         sh 'docker build -t sweetpeaito/production-application:latest .'
+        //     }
+        //  }
 
     //      stage("Trivy Scan") {
     //          steps {
