@@ -86,7 +86,7 @@ pipeline{
           steps{
             echo 'Packaging demo app with docker'
             script{
-              docker.withRegistry('https://index.docker.io/v1/', dckr_pat_F-ea8WBBeNC7BTmSZeWEysGHIXk) {
+              docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                   docker_image = docker.build "${IMAGE_NAME}"
                   docker_image.push()
                   docker_image.push("dev")
