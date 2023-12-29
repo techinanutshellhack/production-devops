@@ -96,10 +96,10 @@ pipeline{
     //         }
     //       }
     //   }
-        stage('Docker Build'){
-            steps {
-      	    sh 'docker build -t sweetpeaito/production-application:latest .'
-        }
+            stage('Docker Build'){
+                steps {
+                sh 'docker build -t sweetpeaito/production-application:latest .'
+            }
 
     //      stage("Trivy Scan") {
     //          steps {
