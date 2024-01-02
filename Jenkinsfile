@@ -90,8 +90,8 @@ pipeline{
             script{
                     docker.withRegistry('',DOCKER_PASS ) {
                             docker_image = docker.build "${IMAGE_NAME}"
-                            docker_image.push()
-                            docker_image.push("dev")
+                           // docker_image.push()
+                            docker_image.push("${IMAGE_TAG}")
                             docker_image.push("latest")
                    // dockerImage = docker.build registry + "latest"
               }
