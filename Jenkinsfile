@@ -16,7 +16,7 @@ pipeline{
         DOCKER_PASS = 'dockerhub'//this is a secret that will be set up and used to sign into docker. it wull be setup in docker hub as an access token
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-      //  JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
+       JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
 
     }
     stages{
@@ -98,11 +98,7 @@ pipeline{
             }
           }
       }
-        //     stage('Docker Build'){
-        //         steps {
-        //         sh 'docker build -t sweetpeaito/production-application:latest .'
-        //     }
-        //  }
+       
 
     //      stage("Trivy Scan") {
     //          steps {
@@ -123,16 +119,16 @@ pipeline{
     //      }
 
 
-    //      stage("Trigger CD Pipeline") {
-    //          steps {
-    //              script {
-    //                  sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'https://jenkins.dev.dman.cloud/job/gitops-complete-pipeline/buildWithParameters?token=gitops-token'"
-    //              }
-    //          }
+         stage("Trigger CD Pipeline") {
+             steps {
+                 script {
+                     sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'https://localhost:9000/job/application/buildWithParameters?token=application'"
+                 }
+             }
 
-    //      }
+         }
 
-    //  }
+     }
 
     //  post {
     //      failure {
