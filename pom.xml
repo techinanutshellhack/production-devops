@@ -8,7 +8,7 @@
 		<version>3.0.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.dmancloud.dinesh</groupId>
+	<groupId>localhost</groupId>
 	<artifactId>demoapp</artifactId>
 	<version>1.0.0</version>
 	<name>demoapp</name>

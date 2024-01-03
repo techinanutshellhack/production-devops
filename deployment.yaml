@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testdeployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: testdeployment
+  template:
+    metadata:
+      labels:
+        app: testdeployment
+    spec:
+      containers:
+      - name: testdeployment
+        image: sweetpeaito/production-pipeline:latest
+        ports:
+        - containerPort: 80
+
