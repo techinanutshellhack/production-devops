@@ -48,16 +48,16 @@ pipeline{
 
         }
         
-        // stage("Sonarqube Analysis") {//send code from source code repo to sonarcube for analysis
-        //     steps {
-        //         script {
-        //             withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
-        //                 sh "mvn sonar:sonar"
-        //             }
-        //         }
-        //     }
+        stage("Sonarqube Analysis") {//send code from source code repo to sonarcube for analysis
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
 
-        // }
+        }
 
     //    stage("Quality Gate") {
     //          steps {
@@ -109,14 +109,14 @@ pipeline{
 
     //     }
 
-    //      stage ('Cleanup Artifacts') {
-    //          steps {
-    //              script {
-    //                  sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-    //                  sh "docker rmi ${IMAGE_NAME}:latest"
-    //              }
-    //          }
-    //      }
+         stage ('Cleanup Artifacts') {
+             steps {
+                 script {
+                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                     sh "docker rmi ${IMAGE_NAME}:latest"
+                 }
+             }
+         }
 
 
          stage("Trigger CD Pipeline") {
@@ -130,15 +130,16 @@ pipeline{
 
      }
 
-    //  post {
-    //      failure {
-    //      emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
-    //                  subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed", 
-    //                  mimeType: 'text/html',to: "itohaneregie@gmail.com"
-    //          }
-    //       success {
-    //             emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
-    //                  subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful", 
-    //                  mimeType: 'text/html',to: "itohaneregie@gmail.com"
+    //   post {
+    //       failure {
+    //       emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
+    //                   subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed", 
+    //                   mimeType: 'text/html',to: "itohaneregie@gmail.com"
+    //           }
+    //        success {
+    //              emailext body: '''${SCRIPT, template="groovy-html.template"}''', 
+    //                   subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful", 
+    //                   mimeType: 'text/html',to: "itohaneregie@gmail.com"
     //        }      
-     }
+    //  }
+}
