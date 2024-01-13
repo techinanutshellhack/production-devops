@@ -51,7 +51,7 @@ pipeline{
         stage("Sonarqube Analysis") {//send code from source code repo to sonarcube for analysis
             steps {
                 script {
-                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube') {
+                    withSonarQubeEnv(credentialsId: 'sonarqube-jenkins') {
                         sh "mvn sonar:sonar"
                     }
                 }
