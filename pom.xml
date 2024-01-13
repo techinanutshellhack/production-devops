@@ -8,7 +8,7 @@
 		<version>3.0.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>ec2-16-171-199-144.eu-north-1.compute.amazonaws.com/</groupId>
+	<groupId>ec2-16-171-199-144.eu-north-1.compute.amazonaws.com</groupId>
 	<artifactId>demoapp</artifactId>
 	<version>1.0.0</version>
 	<name>demoapp</name>
