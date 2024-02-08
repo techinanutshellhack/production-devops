@@ -1,4 +1,5 @@
-
+//the agent is the machine that runs the jobs and as such it should have all the dependencies it requires to execute the job . for example 
+//docker . docker docker cki must be installed on the agent in order to run docker build commands 
 pipeline{
     agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed . in production , use a dedicated agent
          //label "built-in"
@@ -59,14 +60,14 @@ pipeline{
 
         }
 
-    //    stage("Quality Gate") {
-    //          steps {
-    //             script {
-    //                  waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'
-    //              }
-    //          }
+        stage("Quality Gate") {
+              steps {
+                 script {
+                      waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-jenkins'
+                  }
+              }
 
-    //      }
+          }
 
         //  stage("Build & Push Docker Image") {
         //      steps {
@@ -119,12 +120,12 @@ pipeline{
          }
 
 
-        //  stage("Trigger CD Pipeline") {
-        //      steps {
-        //          script {
-        //              sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://localhost:8080/job/application/buildWithParameters?token=application'"
-        //          }
-        //      }
+          stage("Trigger CD Pipeline") {
+              steps {
+                  script {
+                      sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://http://ec2-16-171-199-144.eu-north-1.compute.amazonaws.com:8080/:8080/job/application/buildWithParameters?token=application'"
+                  }
+              }
 
         //  }
 
