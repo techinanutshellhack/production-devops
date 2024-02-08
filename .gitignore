@@ -4,6 +4,8 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+minikube-linux-amd64
+configmap-argocd
 
 # Local History for Visual Studio Code
 .history/
