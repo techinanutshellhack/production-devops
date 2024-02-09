@@ -73,7 +73,7 @@ pipeline{
 //         //  stage("Build & Push Docker Image") {
 //         //      steps {
 //         //          script {
-//         //              docker.withRegistry('https://index.docker.io/v1/',DOCKER_PASS) {
+//         //              docker.withRegistry('',DOCKER_PASS) {
 //         //                  docker_image = docker.build "${IMAGE_NAME}"
 //         //              }
 
@@ -85,40 +85,40 @@ pipeline{
 //         //      }
 
 //         //  }
-//         stage('Docker Build and Push'){
+        stage('Docker Build and Push'){
           
-//           steps{
-//             echo 'Packaging demo app with docker'
-//             script{
-//                     docker.withRegistry('',DOCKER_PASS ) {
-//                             docker_image = docker.build "${IMAGE_NAME}"
-//                            // docker_image.push()
-//                             docker_image.push("${IMAGE_TAG}")
-//                             docker_image.push("latest")
-//                    // dockerImage = docker.build registry + "latest"
-//               }
-//             }
-//           }
-//       }
+          steps{
+            echo 'Packaging demo app with docker'
+            script{
+                    docker.withRegistry('',DOCKER_PASS ) {
+                            docker_image = docker.build "${IMAGE_NAME}"
+                           // docker_image.push()
+                            docker_image.push("${IMAGE_TAG}")
+                            docker_image.push("latest")
+                   // dockerImage = docker.build registry + "latest"
+              }
+            }
+          }
+      }
        
 
-//     //      stage("Trivy Scan") {
-//     //          steps {
-//     //              script {
-// 	// 	   sh ('docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image sweetpeaito/production-pipeline:1.0.0-22 --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table')
-//     //              }
-//     //          }
+    //      stage("Trivy Scan") {
+    //          steps {
+    //              script {
+	// 	   sh ('docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image sweetpeaito/production-pipeline:1.0.0-22 --no-progress --scanners vuln  --exit-code 0 --severity HIGH,CRITICAL --format table')
+    //              }
+    //          }
 
-//     //     }
+    //     }
 
-//          stage ('Cleanup Artifacts') {
-//              steps {
-//                  script {
-//                      sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-//                      sh "docker rmi ${IMAGE_NAME}:latest"
-//                  }
-//              }
-//          }
+         stage ('Cleanup Artifacts') {
+             steps {
+                 script {
+                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                     sh "docker rmi ${IMAGE_NAME}:latest"
+                 }
+             }
+         }
 
 
 //           stage("Trigger CD Pipeline") {
