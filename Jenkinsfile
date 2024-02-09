@@ -50,25 +50,25 @@ pipeline{
 
         }
         
-//         stage("Sonarqube Analysis") {//send code from source code repo to sonarcube for analysis
-//             steps {
-//                 script {
-//                     withSonarQubeEnv(credentialsId: 'sonarqube-jenkins') {
-//                         sh "mvn sonar:sonar"
-//                     }
-//                 }
-//             }
+        stage("Sonarqube Analysis") {//send code from source code repo to sonarcube for analysis
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'sonarqube-jenkins') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
 
-//         }
+        }
 
-//         stage("Quality Gate") {
-//               steps {
-//                  script {
-//                       waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-jenkins'
-//                   }
-//               }
+        stage("Quality Gate") {
+              steps {
+                 script {
+                      waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-jenkins'
+                  }
+              }
 
-//           }
+          }
 
 //         //  stage("Build & Push Docker Image") {
 //         //      steps {
