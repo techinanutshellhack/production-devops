@@ -1,3 +1,4 @@
+//This file has been modified by Itohan Eregie on 29/04/2024
 pipeline{
      agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed . in production , use a dedicated agent
          //label "built-in"
@@ -28,7 +29,7 @@ pipeline{
     
         stage("Checkout from SCM"){//check out the code from git repo into the jenkins workspace 
             steps {
-                git branch: 'main', credentialsId: 'git', url: 'https://github.com/techinanutshellhack/java-sample.git'
+                git branch: 'main', credentialsId: 'git', url: 'https://github.com/techinanutshellhack/production-devops.git'
             }
 
         }
