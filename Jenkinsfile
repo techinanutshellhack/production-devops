@@ -11,12 +11,13 @@ pipeline{
        
     }
     environment {
-        APP_NAME = "java-sample"
+        APP_NAME = "production-pipeline "
         RELEASE_NUMBER = "1.0"
         DOCKER_USER = "sweetpeaito"
         DOCKER_PASS = 'docker'//This is a secret that will be set up and used to sign into docker. it will be setup in docker hub as an access token
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE_NUMBER}"
+        JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
     
     }
     stages{
@@ -71,5 +72,14 @@ pipeline{
                  }
              }
         }
+        stage ('Trigger CD Pipeline'){//trigger the continuous deployment pipeline 
+            steps {
+                    script {
+                        sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://localhost:8080/job/application-deployment/buildWithParameters?token=application-deployment-token'"
+                    }
+                }
+ 
+        }
+        
     }
 }
