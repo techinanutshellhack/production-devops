@@ -80,22 +80,22 @@ pipeline{
         //   }
         // }
 
-        // stage ('Cleanup Artifacts') {
-        //      steps {
-        //          script {
-        //              sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-        //              sh "docker rmi ${IMAGE_NAME}:latest"
-        //          }
-        //      }
-        // }
-        // stage ('Trigger CD Pipeline'){//trigger the continuous deployment pipeline 
-        //     steps {
-        //             script {
-        //                 sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://localhost:8080/job/application-deployment/buildWithParameters?token=application-deployment-token'"
-        //             }
-        //         }
+        stage ('Cleanup Artifacts') {
+             steps {
+                 script {
+                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                     sh "docker rmi ${IMAGE_NAME}:latest"
+                 }
+             }
+        }
+        stage ('Trigger CD Pipeline'){//trigger the continuous deployment pipeline 
+            steps {
+                    script {
+                        sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://localhost:8080/job/application-deployment/buildWithParameters?token=application-deployment-token'"
+                    }
+                }
  
-        // }
+        }
         
     }
 }
