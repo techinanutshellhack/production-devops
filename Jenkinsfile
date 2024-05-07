@@ -50,36 +50,36 @@ pipeline{
 
         }
         
-        stage('Docker Build and Push'){
+        // stage('Docker Build and Push'){
           
-          steps{
-            echo 'Docker build app'
-            script{
-                    docker.withRegistry('',DOCKER_PASS ) {
-                            docker_image = docker.build "${IMAGE_NAME}"
-                            docker_image.push("${IMAGE_TAG}")
-                            docker_image.push("latest")
-              }
-            }
-          }
-        }
+        //   steps{
+        //     echo 'Docker build app'
+        //     script{
+        //             docker.withRegistry('',DOCKER_PASS ) {
+        //                     docker_image = docker.build "${IMAGE_NAME}"
+        //                     docker_image.push("${IMAGE_TAG}")
+        //                     docker_image.push("latest")
+        //       }
+        //     }
+        //   }
+        // }
 
-        stage ('Cleanup Artifacts') {
-             steps {
-                 script {
-                     sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
-                     sh "docker rmi ${IMAGE_NAME}:latest"
-                 }
-             }
-        }
-        stage ('Trigger CD Pipeline'){//trigger the continuous deployment pipeline 
-            steps {
-                    script {
-                        sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://localhost:8080/job/application-deployment/buildWithParameters?token=application-deployment-token'"
-                    }
-                }
+        // stage ('Cleanup Artifacts') {
+        //      steps {
+        //          script {
+        //              sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+        //              sh "docker rmi ${IMAGE_NAME}:latest"
+        //          }
+        //      }
+        // }
+        // stage ('Trigger CD Pipeline'){//trigger the continuous deployment pipeline 
+        //     steps {
+        //             script {
+        //                 sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://localhost:8080/job/application-deployment/buildWithParameters?token=application-deployment-token'"
+        //             }
+        //         }
  
-        }
+        // }
         
     }
 }
