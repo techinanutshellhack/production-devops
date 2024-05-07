@@ -15,7 +15,8 @@ pipeline{
         RELEASE_NUMBER = "1.0.0"
         DOCKER_USER = "sweetpeaito"
         DOCKER_PASS = "docker"//This is a secret that will be set up and used to sign into docker. it will be setup in docker hub as an access token
-        IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+        // IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+        IMAGE_NAME = "sweetpeaito/production-pipeline"
         IMAGE_TAG = "${RELEASE_NUMBER}-${BUILD_NUMBER}"
         JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
     
@@ -49,7 +50,7 @@ pipeline{
             }
 
         }
-         stage("Build & Push Docker Image") {
+        stage("Build & Push Docker Image") {
             steps {
                 script {
                     docker.withRegistry('',DOCKER_PASS) {
