@@ -50,19 +50,19 @@ pipeline{
 
         }
         
-        // stage('Docker Build and Push'){
+        stage('Docker Build and Push'){
           
-        //   steps{
-        //     echo 'Docker build app'
-        //     script{
-        //             docker.withRegistry('',DOCKER_PASS ) {
-        //                     docker_image = docker.build "${IMAGE_NAME}"
-        //                     docker_image.push("${IMAGE_TAG}")
-        //                     docker_image.push("latest")
-        //       }
-        //     }
-        //   }
-        // }
+          steps{
+            echo 'Docker build app'
+            script{
+                    docker.withRegistry('',DOCKER_PASS ) {
+                            docker_image = docker.build "${IMAGE_NAME}"
+                            docker_image.push("${IMAGE_TAG}")
+                            docker_image.push("latest")
+              }
+            }
+          }
+        }
 
         // stage ('Cleanup Artifacts') {
         //      steps {
