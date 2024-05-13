@@ -1,9 +1,8 @@
 //This file has been modified by Itohan Eregie on 29/04/2024
 pipeline{
-     agent{  //the agent is the vm that the all the dependencies for the jenkins pipeline to run in will be installed . in production , use a dedicated agent
-         //label "built-in"
+     agent{  
          label "wsl"
-        //docker { image 'node:20.10.0-alpine3.19' }
+       
     }
     tools {
         jdk 'Java17' //this installs java 
@@ -50,6 +49,25 @@ pipeline{
             }
 
         }
+        stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
+
+        }
+
+        stage("Quality Gate") {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'
+                }
+            }
+
+        }
         stage("Build & Push Docker Image") {
             steps {
                 script {
@@ -66,20 +84,6 @@ pipeline{
 
         }
         
-        // stage('Docker Build and Push'){
-          
-        //   steps{
-        //     echo 'Docker build app'
-        //     script{
-        //             docker.withRegistry('',DOCKER_PASS ) {
-        //                     docker_image = docker.build "${IMAGE_NAME}"
-        //                     docker_image.push("${IMAGE_TAG}")
-        //                     docker_image.push("latest")
-        //       }
-        //     }
-        //   }
-        // }
-
         stage ('Cleanup Artifacts') {
              steps {
                  script {
