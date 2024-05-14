@@ -53,8 +53,8 @@ pipeline{
             steps {
                 script {
                     withSonarQubeEnv(credentialsId: 'sonarqube-jenkins') {
-                        //sh "mvn sonar:sonar"
-                        "mvn sonar:sonar -Dsonar.organization=demodevsecops-1"
+                        sh "mvn sonar:sonar"
+                        //"mvn sonar:sonar -Dsonar.organization=demodevsecops-1"
 
                     }
                 }
