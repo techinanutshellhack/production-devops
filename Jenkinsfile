@@ -1,7 +1,7 @@
 //This file has been modified by Itohan Eregie on 29/04/2024
 pipeline{
      agent{  
-         label "wsl"
+         label "agent1"
        
     }
     tools {
